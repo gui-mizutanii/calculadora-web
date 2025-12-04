@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { registrar } from "../services/api";
+import { registrarUsuario } from "../services/api";
 import { validarRegistro } from "../utils/validacoes";
-import "./Registra.css";
+import { useNavigate } from "react-router-dom";
+import "./Registrar.css";
 
 export default function Registra() {
   const [nome, setNome] = useState("");
@@ -9,11 +10,11 @@ export default function Registra() {
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
   const [sucesso, setSucesso] = useState("");
+  const navigate = useNavigate();
 
   const handleRegistrar = async (e) => {
     e.preventDefault();
 
-    // Validação
     const msgErro = validarRegistro(nome, email, senha);
     if (msgErro) {
       setErro(msgErro);
@@ -22,11 +23,9 @@ export default function Registra() {
     }
 
     try {
-      await registrar(nome, email, senha);
+      await registrarUsuario({ nome, email, senha });
       setErro("");
       setSucesso("Conta criada com sucesso!");
-
-      // Limpa os campos
       setNome("");
       setEmail("");
       setSenha("");
@@ -37,43 +36,51 @@ export default function Registra() {
   };
 
   return (
-    <div className="registro-container">
-      <h2>Criar Conta</h2>
+    <div className="reg-container">
+      <div className="reg-card">
+        <h2 className="reg-title">Criar Conta</h2>
 
-      <form onSubmit={handleRegistrar} className="registro-form">
+        <form onSubmit={handleRegistrar} className="reg-form">
+          <label>Nome:</label>
+          <input
+            type="text"
+            placeholder="Seu nome (mínimo 3 letras)"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+          />
 
-        <label>Nome:</label>
-        <input
-          type="text"
-          placeholder="Seu nome (mínimo 3 letras)"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-        />
+          <label>Email:</label>
+          <input
+            type="email"
+            placeholder="suaConta@gmail.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <div className="dica-container">
+            <small className="dica">
+              O email deve terminar com <b>@gmail.com</b> e ter ao menos 2 caracteres antes.
+            </small>
+          </div>
 
-        <label>Email:</label>
-        <input
-          type="email"
-          placeholder="suaConta@gmail.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <small className="dica">
-          O email deve terminar com <b>@gmail.com</b> e ter ao menos 2 caracteres antes.
-        </small>
+          <label>Senha:</label>
+          <input
+            type="password"
+            placeholder="Mínimo 4 caracteres"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
 
-        <label>Senha:</label>
-        <input
-          type="password"
-          placeholder="Mínimo 4 caracteres"
-          value={senha}
-          onChange={(e) => setSenha(e.target.value)}
-        />
+          {erro && <p className="erro">{erro}</p>}
+          {sucesso && <p className="sucesso">{sucesso}</p>}
 
-        {erro && <p className="erro">{erro}</p>}
-        {sucesso && <p className="sucesso">{sucesso}</p>}
+          <button type="submit" className="btn">Registrar</button>
+        </form>
 
-        <button type="submit">Registrar</button>
-      </form>
+        <p className="login-text">
+          Já tem conta?
+          <span onClick={() => navigate("/")} className="login-link"> Entrar</span>
+        </p>
+      </div>
     </div>
   );
 }
