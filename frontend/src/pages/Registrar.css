@@ -1,0 +1,94 @@
+.reg-container {
+  width: 100%;
+  height: 100vh;
+  background: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+}
+
+.reg-card {
+  width: 350px;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.reg-title {
+  font-size: 24px;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #d1d1d1;
+  background: #fafafa;
+  font-size: 15px;
+}
+
+.input:focus {
+  border-color: #9c9c9c;
+  background: #fff;
+  outline: none;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #3a3a3a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background: #000;
+}
+
+.msg {
+  margin-top: 12px;
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.login-text {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #4a4a4a;
+}
+
+.login-link {
+  color: #000;
+  cursor: pointer;
+  margin-left: 5px;
+  font-weight: 600;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+/* estilo de erro */
+.input-error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.06);
+}
+
+.erro-validacao {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  text-align: left;
+}
